@@ -243,37 +243,37 @@ def BFS4Lab(labyrinth: np.ndarray, start: tuple, finish: tuple, mode="BFS") -> t
     return (end_time-start_time, len(path)+1)
 
 
-DFS_time = []
-AStar_time = []
-BFS_time = []
+# DFS_time = []
+# AStar_time = []
+# BFS_time = []
 
-DFS_len = []
-AStar_len = []
-BFS_len = []
+# DFS_len = []
+# AStar_len = []
+# BFS_len = []
 
-for i in tqdm(range(1000)):
-    lab = create_labyrinth(5, 5, 5)
-    xs, ys, xf, yf = start_finish(lab)
+# for i in tqdm(range(1000)):
+#     lab = create_labyrinth(5, 5, 5)
+#     xs, ys, xf, yf = start_finish(lab)
 
-    times, length = DFS4Lab(lab, (xs, ys), (xf, yf), mode="DFS")
-    DFS_time.append(times)
-    DFS_len.append(length)
+#     times, length = DFS4Lab(lab, (xs, ys), (xf, yf), mode="DFS")
+#     DFS_time.append(times)
+#     DFS_len.append(length)
 
-    times, length = DFS4Lab(lab, (xs, ys), (xf, yf), mode="AStar")
-    AStar_len.append(length)
-    AStar_time.append(times)
+#     times, length = DFS4Lab(lab, (xs, ys), (xf, yf), mode="AStar")
+#     AStar_len.append(length)
+#     AStar_time.append(times)
 
-    times, length = BFS4Lab(lab, (xs, ys), (xf, yf))
-    BFS_time.append(times)
-    BFS_len.append(length)
+#     times, length = BFS4Lab(lab, (xs, ys), (xf, yf))
+#     BFS_time.append(times)
+#     BFS_len.append(length)
 
-data = pd.DataFrame({"DFS_time":DFS_time,
-                     "DFS_len":DFS_len,
-                     "BFS_time": BFS_time,
-                     "BFS_len": BFS_len,
-                     "AStar_time":AStar_time,
-                     "AStar_len":AStar_len
-                     })
+# data = pd.DataFrame({"DFS_time":DFS_time,
+#                      "DFS_len":DFS_len,
+#                      "BFS_time": BFS_time,
+#                      "BFS_len": BFS_len,
+#                      "AStar_time":AStar_time,
+#                      "AStar_len":AStar_len
+#                      })
 
-data.to_csv("9x9_5.csv")
+# data.to_csv("9x9_5.csv")
 
