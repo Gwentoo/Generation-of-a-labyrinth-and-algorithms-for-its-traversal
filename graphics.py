@@ -27,6 +27,6 @@ ax2.set_ylabel('Time (seconds)')
 ax2.set_ylim(0, df[['DFS_time', 'BFS_time', 'AStar_time']].max().max()+0.001)
 ax2.legend()
 
-# Отображение графиков
-plt.tight_layout()  # Автоматическая настройка отступов
+
+plt.tight_layout() 
 plt.show()
