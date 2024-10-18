@@ -208,7 +208,7 @@ def DFS4Lab(labyrinth: np.ndarray, start: tuple, finish: tuple, mode: str) -> No
 
 Пример работы DFS
 
-![](Gifs\DFS\DFS2.gif)
+![](Gifs/DFS/DFS2.gif)
 ___
 
 # AStar
@@ -241,8 +241,8 @@ ___
 ```
 Пример работы A*
 
-![](Gifs\AStar\AStar1.gif)
-![](Gifs\AStar\AStar3.gif)
+![](Gifs/AStar/AStar1.gif)
+![](Gifs/AStar/AStar3.gif)
 
 Особенно хорошо он справляется сильно разреженными лабиринтам (но не всегда)
 ___
@@ -369,8 +369,8 @@ def BFS4Lab(labyrinth: np.ndarray, start: tuple, finish: tuple, mode="BFS") -> N
 
 Пример работы BFS:
 
-![](Gifs\BFS\BFS1.gif)
-![](Gifs\BFS\BFS3.gif)
+![](Gifs/BFS/BFS1.gif)
+![](Gifs/BFS/BFS3.gif)
 
 
 
