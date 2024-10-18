@@ -173,7 +173,6 @@ ___
 ```
 def DFS4Lab(labyrinth: np.ndarray, start: tuple, finish: tuple, mode: str) -> None:
     labyrinth = labyrinth.copy()
-    #count = 0
 
     x_start, y_start = start
     x_finish, y_finish = finish
@@ -185,7 +184,7 @@ def DFS4Lab(labyrinth: np.ndarray, start: tuple, finish: tuple, mode: str) -> No
     x, y, _, __ = choice_transition(x, y, labyrinth, mode, finish)
 
     while True:
-        #count += 1
+
         while not (x >= 0 and y >= 0):
             way.pop()
             x, y = way[-1]
@@ -197,15 +196,8 @@ def DFS4Lab(labyrinth: np.ndarray, start: tuple, finish: tuple, mode: str) -> No
         labyrinth[x][y] = 4
         x, y, _, __ = choice_transition(x, y, labyrinth, mode, finish)
 
-
-        #draw_lab(labyrinth, f"/Ваш путь/{count}.png")
-    #for point in way[1:len(way)-1]:
-        #x, y = point[0], point[1]
-        #labyrinth[x][y] = 5
-    #draw_lab(labyrinth, f"/Ваш путь/{count}.png")
-
 ```
-[5]: Аргумент mode принимает значение или "DFS", или "AStar". Это связано с тем, что AStar, рассматриваемый в этом  проекте будет похож на DFS, но главное различие в  способе выбора следующей клетки. Закомментированные строки нужны для визуализации алгоритма. На каждом шаге в выбранную папку будет сохраняться изображение с шагом алгоритма.
+[5]: Аргумент mode принимает значение или "DFS", или "AStar". Это связано с тем, что AStar, рассматриваемый в этом  проекте будет похож на DFS, но главное различие в  способе выбора следующей клетки.
 
 Пример работы DFS
 
@@ -328,7 +320,7 @@ def BFS4Lab(labyrinth: np.ndarray, start: tuple, finish: tuple, mode="BFS") -> N
     labyrinth = labyrinth.copy()
     queue = [start]
     parent = {}
-    #count = 0
+
     x_start, y_start = start
     x_finish, y_finish = finish
     labyrinth[x_start][y_start] = 2
@@ -349,9 +341,6 @@ def BFS4Lab(labyrinth: np.ndarray, start: tuple, finish: tuple, mode="BFS") -> N
                     labyrinth[nx][ny] = 4
                 parent[(nx, ny)] = (x, y)
 
-                #draw_lab(labyrinth, f"C:/Users/timof/Desktop/Progs/Labirint/{mode}/{count}.png")
-                #count += 1
-
     #Определение пути
     path = []
     curr = finish
@@ -359,12 +348,6 @@ def BFS4Lab(labyrinth: np.ndarray, start: tuple, finish: tuple, mode="BFS") -> N
         path.append(curr)
         curr = parent[curr]
     path.reverse()
-
-    #Визуализация пути
-    #for point in path[:len(path)-1]:
-        #x, y = point[0], point[1]
-        #labyrinth[x][y] = 5
-    #draw_lab(labyrinth, f"/Ваш путь/{count}.png")
 
 ```
 
