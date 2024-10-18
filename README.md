@@ -15,25 +15,7 @@ ___
 
 Данный алгоритм создает лабиринт без циклов, а значит путь от начальной до конечной точки существует только один. Более подробно про этот алгоритм можно почитать в [статье](https://habr.com/ru/articles/778202/) на хабре.
 
-[1]: Функция start_point возвращает кортеж с координатами начальной точки
-```
-def start_point(M: int, N: int) -> tuple:
-    if random.choice([True, False]):
-        if random.choice([True, False]):
-            start = (M - 1, random.choice([i for i in range(1, N - 1)]))
-        else:
-            start = (0, random.choice([i for i in range(1, N - 1)]))
-
-    else:
-        if random.choice([True, False]):
-            start = (random.choice([i for i in range(0, M)]), 0)
-        else:
-            start = (random.choice([i for i in range(0, M)]), N - 1)
-
-    return start
-```
-
-[2]: Функция choice_transition возвращает кортеж из координат следующей клетки (для  матрицы достижимости и матрицы переходов). Параметры mode и finish будут нужны позже для реализации алгоритмов.
+[1]: Функция choice_transition возвращает кортеж из координат следующей клетки (для  матрицы достижимости и матрицы переходов). Параметры mode и finish будут нужны позже для реализации алгоритмов.
 
 ```
 def choice_transition(x: int, y: int, rm: np.ndarray, mode: str, finish = (-1, 1)) -> tuple:
@@ -70,7 +52,7 @@ def choice_transition(x: int, y: int, rm: np.ndarray, mode: str, finish = (-1, 1
         return (-1, -1, -1, -1)
 ```
 
-[3]: Функция  create_labyrinth создаёт матрицу лабиринта. Параметр count_door будет нужен для создания лабиринтов с циклами.
+[2]: Функция  create_labyrinth создаёт матрицу лабиринта. Параметр count_door будет нужен для создания лабиринтов с циклами.
 
 ```
 def create_labyrinth(M: int, N: int, count_door: int) -> np.ndarray:
@@ -127,16 +109,6 @@ def create_labyrinth(M: int, N: int, count_door: int) -> np.ndarray:
 <img src="maze1.jpg" alt="Альтернативный текст" width="300" height="300"/>
 
 Остаётся только добавить начальную и конечную точку.
-
-[4]: Функция start_finish
-```
-def start_finish(labyrinth: np.ndarray) -> tuple:
-    while True:
-        xs, ys, xf, yf = random.randint(1, labyrinth.shape[0]-1), random.randint(1, labyrinth.shape[1]-1),\
-            random.randint(1, labyrinth.shape[0]-1), random.randint(1, labyrinth.shape[1]-1)
-        if labyrinth[xs][ys] == 1 and labyrinth[xf][yf] == 1:
-            return (xs, ys, xf, yf)
-```
 
 <img src="maze2.jpg" alt="Альтернативный текст" width="300" height="300"/>
 
@@ -197,7 +169,7 @@ def DFS4Lab(labyrinth: np.ndarray, start: tuple, finish: tuple, mode: str) -> No
         x, y, _, __ = choice_transition(x, y, labyrinth, mode, finish)
 
 ```
-[5]: Аргумент mode принимает значение или "DFS", или "AStar". Это связано с тем, что AStar, рассматриваемый в этом  проекте будет похож на DFS, но главное различие в  способе выбора следующей клетки.
+[3]: Аргумент mode принимает значение или "DFS", или "AStar". Это связано с тем, что AStar, рассматриваемый в этом  проекте будет похож на DFS, но главное различие в  способе выбора следующей клетки.
 
 Пример работы DFS
 
@@ -314,7 +286,7 @@ def choice_transition(x: int, y: int, rm: np.ndarray, mode: str, finish = (-1, 1
 
 Сам же  алгоритм выглядит так:
 
-[6]: Путь от начальной до конечной точки содержится в списке path
+[4]: Путь от начальной до конечной точки содержится в списке path
 ```
 def BFS4Lab(labyrinth: np.ndarray, start: tuple, finish: tuple, mode="BFS") -> None:
     labyrinth = labyrinth.copy()
@@ -355,46 +327,6 @@ def BFS4Lab(labyrinth: np.ndarray, start: tuple, finish: tuple, mode="BFS") -> N
 
 ![](Gifs/BFS/BFS1.gif)
 ![](Gifs/BFS/BFS3.gif)
-
-
-
-___
-# Функция для рисования лабиринтов:
-```
-def draw_lab(labyrinth: np.ndarray, path: str) -> None:
-    labyrinth = np.pad(labyrinth, pad_width=1, constant_values=0)
-
-    cell_size = 15
-    width = labyrinth.shape[1] * cell_size
-    height = labyrinth.shape[0] * cell_size
-
-    image = Image.new('RGB', (width, height), 'white')
-    draw = ImageDraw.Draw(image)
-
-    for i in range(labyrinth.shape[0]):
-        for j in range(labyrinth.shape[1]):
-            if labyrinth[i][j] == 0: #BLOCK
-                draw.rectangle([j * cell_size, i * cell_size,
-                                (j + 1) * cell_size, (i + 1) * cell_size],
-                               fill='black')
-            elif labyrinth[i][j] == 2: #START
-                draw.rectangle([j * cell_size, i * cell_size,
-                                (j + 1) * cell_size, (i + 1) * cell_size],
-                               fill='blue')
-            elif labyrinth[i][j] == 3: #FINISH
-                draw.rectangle([j * cell_size, i * cell_size,
-                                (j + 1) * cell_size, (i + 1) * cell_size],
-                               fill='red')
-            elif labyrinth[i][j] == 4: #SEARCH
-                draw.rectangle([j * cell_size, i * cell_size,
-                                (j + 1) * cell_size, (i + 1) * cell_size],
-                               fill='green')
-            elif labyrinth[i][j] == 5: #WAY
-                draw.rectangle([j * cell_size, i * cell_size,
-                                (j + 1) * cell_size, (i + 1) * cell_size],
-                               fill='yellow')
-    image.save(f"{path}")
-```
 
 ___
 # Сравнение и графики
