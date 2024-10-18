@@ -52,10 +52,10 @@ def choice_transition(x: int, y: int, rm: np.ndarray, mode: str, finish = (-1, 1
         return (-1, -1, -1, -1)
 ```
 
-[2]: Функция  create_labyrinth создаёт матрицу лабиринта. Параметр count_door будет нужен для создания лабиринтов с циклами.
+[2]: Функция  create_labyrinth создаёт матрицу лабиринта. 
 
 ```
-def create_labyrinth(M: int, N: int, count_door: int) -> np.ndarray:
+def create_labyrinth(M: int, N: int) -> np.ndarray:
 
     labyrinth = np.zeros((M*2-1, N*2-1))
     for i in range(M*2-1):
@@ -88,22 +88,8 @@ def create_labyrinth(M: int, N: int, count_door: int) -> np.ndarray:
 
 <img src="maze.jpg" alt="Альтернативный текст" width="300" height="300"/>
 
-Чтобы добавить в лабиринт циклы можно случайным образом убирать стены, у которых 2 смежные противоположные стороны одного цвета, а другие 2 смежные стороны другого. Этот кусок кода добавляется в функцию create_labyrinth
+Чтобы добавить в лабиринт циклы можно случайным образом убирать стены, у которых 2 смежные противоположные стороны одного цвета, а другие 2 смежные стороны другого.
 
-```
-    while count_door != 0:
-        x = random.randint(1, M*2-3)
-        y = random.randint(1, N*2-3)
-        if (labyrinth[x-1][y] == 1 and labyrinth[x+1][y] == 1):
-            if (labyrinth[x][y-1] == 0 and  labyrinth[x][y+1]==0):
-                labyrinth[x][y] = 1
-                count_door -= 1
-                continue
-        elif (labyrinth[x][y - 1] == 1 and labyrinth[x][y + 1] == 1):
-            if (labyrinth[x-1][y] == 0 and labyrinth[x+1][y] == 0):
-                labyrinth[x][y] = 1
-                count_door -= 1
-```
 Тогда мы получим следующее:
 
 <img src="maze1.jpg" alt="Альтернативный текст" width="300" height="300"/>
